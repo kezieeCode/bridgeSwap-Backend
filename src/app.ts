@@ -13,7 +13,6 @@ export const createApp = () => {
       allowedHeaders: ['Content-Type', 'Authorization']
     })
   );
-  app.options('*', cors());
   app.get('/health', (_req, res) => res.json({ status: 'ok' }));
   app.use('/api', apiRouter);
   app.use(errorHandler);
