@@ -6,7 +6,8 @@ const requiredEnv = [
   'SUPABASE_URL',
   'SUPABASE_SERVICE_ROLE_KEY',
   'WALLETCONNECT_PROJECT_ID',
-  'WALLETCONNECT_RELAY_URL'
+  'WALLETCONNECT_RELAY_URL',
+  'BSC_RPC_URL'
 ] as const;
 
 type RequiredEnvKey = (typeof requiredEnv)[number];
@@ -25,6 +26,7 @@ export const config = {
   supabaseServiceKey: getEnv('SUPABASE_SERVICE_ROLE_KEY'),
   walletconnectProjectId: getEnv('WALLETCONNECT_PROJECT_ID'),
   walletconnectRelayUrl: getEnv('WALLETCONNECT_RELAY_URL'),
+  bscRpcUrl: getEnv('BSC_RPC_URL'),
   requiredChains: (process.env.SESSION_REQUIRED_CHAINS ?? 'eip155:1')
     .split(',')
     .map((value) => value.trim())

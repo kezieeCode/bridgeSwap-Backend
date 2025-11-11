@@ -15,6 +15,7 @@ Copy `config/env/example.env` to `.env` and populate the following variables:
 - `WALLETCONNECT_RELAY_URL` – Relay server URL (`wss://relay.walletconnect.com`).
 - `SESSION_REQUIRED_CHAINS` – Comma separated CAIP-2 chain ids (`eip155:1`).
 - `SESSION_REQUIRED_METHODS` – Supported RPC methods (`eth_sendTransaction,personal_sign`).
+- `BSC_RPC_URL` – HTTPS endpoint for a trusted BSC JSON-RPC node.
 
 Run migrations in `supabase/migrations` to provision the `wallet_sessions` table:
 
@@ -42,6 +43,10 @@ npm run dev
 - `POST /api/wallet/session/:id/request`
   - Body: `{ method: 'eth_sendTransaction' | 'personal_sign', params: [], chainId }`.
   - Proxies the RPC call through WalletConnect and returns `{ result }`.
+
+- `POST /api/bsc/balance`
+  - Body: `{ "address": "0x..." }`.
+  - Returns `{ address, balance }` where `balance` is the hex-encoded wei balance from the configured BSC RPC.
 
 ## Testing
 
