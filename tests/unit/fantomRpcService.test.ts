@@ -7,43 +7,36 @@ process.env.WALLETCONNECT_PROJECT_ID = process.env.WALLETCONNECT_PROJECT_ID ?? '
 process.env.WALLETCONNECT_RELAY_URL =
   process.env.WALLETCONNECT_RELAY_URL ?? 'wss://relay.walletconnect.com';
 process.env.BSC_RPC_URL = process.env.BSC_RPC_URL ?? 'https://bsc-dataseed.binance.org';
-process.env.ETH_RPC_URL = 'https://ethereum.publicnode.com';
+process.env.ETH_RPC_URL = process.env.ETH_RPC_URL ?? 'https://ethereum.publicnode.com';
 process.env.CRONOS_RPC_URL = process.env.CRONOS_RPC_URL ?? 'https://evm.cronos.org';
-process.env.FANTOM_RPC_URL = process.env.FANTOM_RPC_URL ?? 'https://rpcapi.fantom.network';
+process.env.FANTOM_RPC_URL = 'https://rpcapi.fantom.network';
 process.env.POLYGON_RPC_URL = process.env.POLYGON_RPC_URL ?? 'https://polygon-rpc.com';
 process.env.CASPER_RPC_URL =
   process.env.CASPER_RPC_URL ?? 'https://rpc.mainnet.casperlabs.io/rpc';
 
 import fetch from 'cross-fetch';
-import { ethRpcService } from '../../src/services/ethRpcService';
+import { fantomRpcService } from '../../src/services/fantomRpcService';
 
 const mockedFetch = fetch as unknown as jest.Mock;
 
-describe('ethRpcService', () => {
+describe('fantomRpcService', () => {
   beforeEach(() => {
     mockedFetch.mockReset();
   });
 
-  it('retrieves eth balance via RPC', async () => {
+  it('retrieves fantom balance', async () => {
     mockedFetch.mockResolvedValue({
       ok: true,
       json: async () => ({
         jsonrpc: '2.0',
         id: 1,
-        result: '0x456'
+        result: '0xabc'
       })
     });
 
-    const balance = await ethRpcService.getBalance('0x0000000000000000000000000000000000000000');
-
-    expect(mockedFetch).toHaveBeenCalledWith('https://ethereum.publicnode.com', expect.any(Object));
-    expect(balance).toBe('0x456');
-  });
-
-  it('rejects unsupported methods', async () => {
-    await expect(ethRpcService.forward('eth_blockNumber', [])).rejects.toThrow(
-      'Method eth_blockNumber is not allowed'
-    );
+    const balance = await fantomRpcService.getBalance('0x0000000000000000000000000000000000000000');
+    expect(mockedFetch).toHaveBeenCalledWith('https://rpcapi.fantom.network', expect.any(Object));
+    expect(balance).toBe('0xabc');
   });
 });
 

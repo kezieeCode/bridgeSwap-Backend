@@ -17,6 +17,10 @@ Copy `config/env/example.env` to `.env` and populate the following variables:
 - `SESSION_REQUIRED_METHODS` – Supported RPC methods (`eth_sendTransaction,personal_sign`).
 - `BSC_RPC_URL` – HTTPS endpoint for a trusted BSC JSON-RPC node.
 - `ETH_RPC_URL` – HTTPS endpoint for a trusted Ethereum JSON-RPC node.
+- `CRONOS_RPC_URL` – HTTPS endpoint for a trusted Cronos JSON-RPC node.
+- `FANTOM_RPC_URL` – HTTPS endpoint for a trusted Fantom JSON-RPC node.
+- `POLYGON_RPC_URL` – HTTPS endpoint for a trusted Polygon JSON-RPC node.
+- `CASPER_RPC_URL` – HTTPS endpoint for a trusted Casper JSON-RPC node.
 
 Run migrations in `supabase/migrations` to provision the `wallet_sessions` table:
 
@@ -52,6 +56,22 @@ npm run dev
 - `POST /api/eth/balance`
   - Body: `{ "address": "0x..." }`.
   - Returns `{ address, balance }` using the configured Ethereum RPC (hex wei).
+
+- `POST /api/cronos/balance`
+  - Body: `{ "address": "0x..." }`.
+  - Returns `{ address, balance }` from the configured Cronos RPC.
+
+- `POST /api/fantom/balance`
+  - Body: `{ "address": "0x..." }`.
+  - Returns `{ address, balance }` from the configured Fantom RPC.
+
+- `POST /api/polygon/balance`
+  - Body: `{ "address": "0x..." }`.
+  - Returns `{ address, balance }` from the configured Polygon RPC.
+
+- `POST /api/casper/balance`
+  - Body: `{ "address": "0x..." }`.
+  - Returns `{ address, balance }` from the configured Casper RPC.
 
 ## Testing
 

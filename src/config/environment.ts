@@ -8,7 +8,11 @@ const requiredEnv = [
   'WALLETCONNECT_PROJECT_ID',
   'WALLETCONNECT_RELAY_URL',
   'BSC_RPC_URL',
-  'ETH_RPC_URL'
+  'ETH_RPC_URL',
+  'CRONOS_RPC_URL',
+  'FANTOM_RPC_URL',
+  'POLYGON_RPC_URL',
+  'CASPER_RPC_URL'
 ] as const;
 
 type RequiredEnvKey = (typeof requiredEnv)[number];
@@ -29,6 +33,10 @@ export const config = {
   walletconnectRelayUrl: getEnv('WALLETCONNECT_RELAY_URL'),
   bscRpcUrl: getEnv('BSC_RPC_URL'),
   ethRpcUrl: getEnv('ETH_RPC_URL'),
+  cronosRpcUrl: getEnv('CRONOS_RPC_URL'),
+  fantomRpcUrl: getEnv('FANTOM_RPC_URL'),
+  polygonRpcUrl: getEnv('POLYGON_RPC_URL'),
+  casperRpcUrl: getEnv('CASPER_RPC_URL'),
   requiredChains: (process.env.SESSION_REQUIRED_CHAINS ?? 'eip155:1')
     .split(',')
     .map((value) => value.trim())

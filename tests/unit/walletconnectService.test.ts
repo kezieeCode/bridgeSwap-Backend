@@ -30,6 +30,11 @@ process.env.WALLETCONNECT_PROJECT_ID = 'project-id';
 process.env.WALLETCONNECT_RELAY_URL = 'wss://relay.walletconnect.com';
 process.env.BSC_RPC_URL = process.env.BSC_RPC_URL ?? 'https://bsc-dataseed.binance.org';
 process.env.ETH_RPC_URL = process.env.ETH_RPC_URL ?? 'https://ethereum.publicnode.com';
+process.env.CRONOS_RPC_URL = process.env.CRONOS_RPC_URL ?? 'https://evm.cronos.org';
+process.env.FANTOM_RPC_URL = process.env.FANTOM_RPC_URL ?? 'https://rpcapi.fantom.network';
+process.env.POLYGON_RPC_URL = process.env.POLYGON_RPC_URL ?? 'https://polygon-rpc.com';
+process.env.CASPER_RPC_URL =
+  process.env.CASPER_RPC_URL ?? 'https://rpc.mainnet.casperlabs.io/rpc';
 
 const SignClient = require('@walletconnect/sign-client').default;
 const { sessionRepository } = require('../../src/repositories/sessionRepository');
