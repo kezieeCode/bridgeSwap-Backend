@@ -16,6 +16,7 @@ Copy `config/env/example.env` to `.env` and populate the following variables:
 - `SESSION_REQUIRED_CHAINS` – Comma separated CAIP-2 chain ids (`eip155:1`).
 - `SESSION_REQUIRED_METHODS` – Supported RPC methods (`eth_sendTransaction,personal_sign`).
 - `BSC_RPC_URL` – HTTPS endpoint for a trusted BSC JSON-RPC node.
+- `ETH_RPC_URL` – HTTPS endpoint for a trusted Ethereum JSON-RPC node.
 
 Run migrations in `supabase/migrations` to provision the `wallet_sessions` table:
 
@@ -47,6 +48,10 @@ npm run dev
 - `POST /api/bsc/balance`
   - Body: `{ "address": "0x..." }`.
   - Returns `{ address, balance }` where `balance` is the hex-encoded wei balance from the configured BSC RPC.
+
+- `POST /api/eth/balance`
+  - Body: `{ "address": "0x..." }`.
+  - Returns `{ address, balance }` using the configured Ethereum RPC (hex wei).
 
 ## Testing
 

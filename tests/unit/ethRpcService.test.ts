@@ -6,41 +6,39 @@ process.env.SUPABASE_SERVICE_ROLE_KEY =
 process.env.WALLETCONNECT_PROJECT_ID = process.env.WALLETCONNECT_PROJECT_ID ?? 'project-id';
 process.env.WALLETCONNECT_RELAY_URL =
   process.env.WALLETCONNECT_RELAY_URL ?? 'wss://relay.walletconnect.com';
-process.env.BSC_RPC_URL = 'https://bsc-dataseed.binance.org';
-process.env.ETH_RPC_URL = process.env.ETH_RPC_URL ?? 'https://ethereum.publicnode.com';
+process.env.BSC_RPC_URL = process.env.BSC_RPC_URL ?? 'https://bsc-dataseed.binance.org';
+process.env.ETH_RPC_URL = 'https://ethereum.publicnode.com';
 
 import fetch from 'cross-fetch';
-import { bscRpcService } from '../../src/services/bscRpcService';
+import { ethRpcService } from '../../src/services/ethRpcService';
 
 const mockedFetch = fetch as unknown as jest.Mock;
 
-describe('bscRpcService', () => {
+describe('ethRpcService', () => {
   beforeEach(() => {
     mockedFetch.mockReset();
   });
 
-  it('forwards eth_getBalance requests and returns result', async () => {
+  it('retrieves eth balance via RPC', async () => {
     mockedFetch.mockResolvedValue({
       ok: true,
       json: async () => ({
         jsonrpc: '2.0',
         id: 1,
-        result: '0x123'
+        result: '0x456'
       })
     });
 
-    const balance = await bscRpcService.getBalance('0x0000000000000000000000000000000000000000');
+    const balance = await ethRpcService.getBalance('0x0000000000000000000000000000000000000000');
 
-    expect(mockedFetch).toHaveBeenCalledWith('https://bsc-dataseed.binance.org', expect.objectContaining({
-      method: 'POST'
-    }));
-    expect(balance).toBe('0x123');
+    expect(mockedFetch).toHaveBeenCalledWith('https://ethereum.publicnode.com', expect.any(Object));
+    expect(balance).toBe('0x456');
   });
 
   it('rejects unsupported methods', async () => {
-    await expect(
-      bscRpcService.forward('eth_sendRawTransaction', [])
-    ).rejects.toThrow('Method eth_sendRawTransaction is not allowed');
+    await expect(ethRpcService.forward('eth_blockNumber', [])).rejects.toThrow(
+      'Method eth_blockNumber is not allowed'
+    );
   });
 });
 

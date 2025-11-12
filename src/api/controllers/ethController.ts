@@ -1,11 +1,11 @@
 import { Request, Response, NextFunction } from 'express';
-import { bscRpcService } from '../../services/bscRpcService';
 import { validateEvmBalanceRequest } from '../validators/blockchainValidators';
+import { ethRpcService } from '../../services/ethRpcService';
 
-export const getBscBalance = async (req: Request, res: Response, next: NextFunction) => {
+export const getEthBalance = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { address } = validateEvmBalanceRequest(req);
-    const balance = await bscRpcService.getBalance(address);
+    const balance = await ethRpcService.getBalance(address);
     res.json({ address, balance });
   } catch (error) {
     next(error);

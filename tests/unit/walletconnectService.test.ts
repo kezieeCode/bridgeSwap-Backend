@@ -29,6 +29,7 @@ process.env.SUPABASE_SERVICE_ROLE_KEY = 'service-role-key';
 process.env.WALLETCONNECT_PROJECT_ID = 'project-id';
 process.env.WALLETCONNECT_RELAY_URL = 'wss://relay.walletconnect.com';
 process.env.BSC_RPC_URL = process.env.BSC_RPC_URL ?? 'https://bsc-dataseed.binance.org';
+process.env.ETH_RPC_URL = process.env.ETH_RPC_URL ?? 'https://ethereum.publicnode.com';
 
 const SignClient = require('@walletconnect/sign-client').default;
 const { sessionRepository } = require('../../src/repositories/sessionRepository');

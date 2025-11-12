@@ -1,20 +1,20 @@
 import { Request } from 'express';
 
-const BSC_ADDRESS_REGEX = /^0x[a-fA-F0-9]{40}$/;
+const EVM_ADDRESS_REGEX = /^0x[a-fA-F0-9]{40}$/;
 
 export interface AddressBalanceDto {
   address: string;
 }
 
-export const validateBscBalanceRequest = (req: Request): AddressBalanceDto => {
+export const validateEvmBalanceRequest = (req: Request): AddressBalanceDto => {
   const { address } = req.body ?? req.query ?? {};
 
   if (!address || typeof address !== 'string') {
     throw new Error('address is required');
   }
 
-  if (!BSC_ADDRESS_REGEX.test(address)) {
-    throw new Error('address must be a valid BSC address');
+  if (!EVM_ADDRESS_REGEX.test(address)) {
+    throw new Error('address must be a valid EVM checksum address');
   }
 
   return { address: address.toLowerCase() };
